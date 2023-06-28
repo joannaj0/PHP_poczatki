@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "PHPPoczatek", "PHPPoczatek\PHPPoczatek.phpproj", "{B611529B-FAA8-4198-903C-7B19A14C2F8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B611529B-FAA8-4198-903C-7B19A14C2F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B611529B-FAA8-4198-903C-7B19A14C2F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B611529B-FAA8-4198-903C-7B19A14C2F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B611529B-FAA8-4198-903C-7B19A14C2F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6F47CC9-DBAC-40E2-87B1-223E79AB9D54}
+	EndGlobalSection
+EndGlobal
