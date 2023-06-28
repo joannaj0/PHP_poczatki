@@ -5,6 +5,8 @@ $t = array();
 $t2 = array();
 $t3 = array();
 
+echo ' --- TABLICE JEDNOWYMIAROWE --- ' . PHP_EOL;
+
 $j = 0;
 for ($i = 0; $i < 11; $i++) {
     if ($i % 2 == 0) {
@@ -22,44 +24,59 @@ for ($i = 0; $i < 11; $i++) {
     //echo '$i $imie \n' . PHP_EOL;    //PHP_EOL - nowy wiersz
 }
 
-echo /*count($t) .*/' ---- ' . PHP_EOL;
+echo PHP_EOL;
+echo /*count($t) .*/'---- ' . PHP_EOL;
 
 for ($i = 0; $i < count($t); $i++) {
     echo $t[$i] . PHP_EOL;
 }
 
-echo /*count($t) .*/' - tutaj --- ' . PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- DODAWANIE DO POCZATKU/USUWANIE Z KONCA TABLICY JEDNOWYMIAROWEJ --- ' . PHP_EOL;
+
 array_unshift($t, 20, 21);
 array_pop($t);
 foreach ($t as $tt) {
     echo $tt . PHP_EOL;
 }
 
-echo /*count($t) .*/' ---- ' . PHP_EOL;
+echo PHP_EOL;
 
 print_r($t);
+
+echo PHP_EOL;
+
 print_r($t2);
+
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- TABLICA ASOSJACYJNA --- ' . PHP_EOL;
 
 $t3['imie'] = 'Joanna';
 $t3['nazwisko'] = 'Jelito';
 
 print_r($t3);
 
-
-echo /*count($t) .*/' ---- ' . PHP_EOL;
+echo PHP_EOL;
 
 foreach ($t3 as $key => $tt) {
     echo $key . ' ' . $tt . PHP_EOL;
 }
 
-//$zmienna = '1';
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- SPRAWDZENIE --- ' . PHP_EOL;
 
-//if ($zmienna === 1)
-//{
-//    echo $zmienna . ' To jest jedynka, ktora nie jest parzysta' . PHP_EOL;
-//}
+$zmienna = '1';
+if ($zmienna === 1)
+{
+   echo $zmienna . ' To jest jedynka, ktora nie jest parzysta' . PHP_EOL;
+}
 
-echo ' --tablica dwuwymiarowa-- ' . PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- TABLICA DWUWYMIAROWA --- ' . PHP_EOL;
 
 $tablica_dwuwymiarowa = array();
 for ($i = 0; $i < 10; $i++) {
@@ -70,7 +87,7 @@ for ($i = 0; $i < 10; $i++) {
 
 print_r($tablica_dwuwymiarowa);
 
-echo ' ---- ' . PHP_EOL;
+echo PHP_EOL;
 
 for ($i = 0; $i < 10; $i++) {
     for ($j = 0; $j < 10; $j++) {
@@ -78,10 +95,15 @@ for ($i = 0; $i < 10; $i++) {
     }
     echo PHP_EOL;
 }
-echo PHP_EOL;
-echo $tablica_dwuwymiarowa[4][5] . PHP_EOL;
 
-echo ' -- tablica osoby -- ' . PHP_EOL;
+echo PHP_EOL;
+
+echo $tablica_dwuwymiarowa[4][5];
+
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- WSZYSTKIE OSOBY Z DWUWYMIAROWEJ TABLICY ASOSJACYJNEJ - bledne --- ' . PHP_EOL;
+
 
 $tablica_osoby = array(
     "numer" => array(1, 2, 3),
@@ -91,13 +113,9 @@ $tablica_osoby = array(
 
 print_r($tablica_osoby);
 
-echo ' ---- ' . PHP_EOL;
-
-foreach ($tablica_osoby as $key => $numer) {
-    echo $key . ' ' . $numer . ' ';
-}
-
-echo ' --aktualne-- ' . PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- WSZYSTKIE OSOBY Z DWUWYMIAROWEJ TABLICY ASOSJACYJNEJ --- ' . PHP_EOL;
 
 $tablica_osoby2 = array(
     "1" => array("imie" => "Alicja", "nazwisko" => "Fo", "numer_telefonu" => "000000000"),
@@ -107,30 +125,41 @@ $tablica_osoby2 = array(
 
 print_r($tablica_osoby2);
 
+echo PHP_EOL;
+
+var_dump($tablica_osoby2);
 foreach ($tablica_osoby2 as $var) {
     echo PHP_EOL . $var['imie'] . ' ' . $var['nazwisko'] . ' ' . $var['numer_telefonu'];
 }
 
-echo PHP_EOL . ' ---- ' . PHP_EOL;
-//echo $tablica_osoby2['2']['imie']['nazwisko']['numer_telefonu'];
-$test = "xxx";
-var_dump($tablica_osoby2);
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- WYBRANA OSOBA Z DWUWYMIAROWEJ TABLICY ASOSJACYJNEJ --- ' . PHP_EOL;
 
-echo PHP_EOL . ' ---- ' . PHP_EOL;
 var_dump($tablica_osoby2['1']);
+//echo $tablica_osoby2['1']['imie']['nazwisko']['numer_telefonu'];
 echo $tablica_osoby2['1']['imie'] . ' ' . $tablica_osoby2[1]['nazwisko'] . ' ' . $tablica_osoby2[1]['numer_telefonu'];
 
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' ---DATOWE --- ' . PHP_EOL;
 
-echo PHP_EOL . ' ---- ' . PHP_EOL;
+echo 'data dzis: ' . date("d/m/Y");
 
-echo PHP_EOL . ' --pozycja-- ' . PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- POZYCJA WZORCA W TEKSCIE --- ' . PHP_EOL;
 
 $tekst = 'abc';
-$wzorzec = 'a';
+$wzorzec = 'd';
 $pos = strpos($tekst, $wzorzec);
-echo ' ____ ' . PHP_EOL;
-echo $pos;
-echo ' ____ ' . PHP_EOL;
+var_dump($pos);
+echo 'pozycja: ' . $pos;
+
+echo PHP_EOL;
+echo PHP_EOL;
+echo ' --- SPRAWDZENIE FALSE/TRUE --- ' . PHP_EOL;
+
 if ($pos == false) {
     echo '$pos == false' . PHP_EOL;
 }
@@ -145,6 +174,51 @@ if ($pos === 0) {
 }
 
 if (2 === '2') {
-    echo 'ok';
+    echo '2 === string 2';
 }
+
+if(0 == true)
+{
+    echo '0 == true' . PHP_EOL;
+}
+if(0 == false)
+{
+    echo '0 == false' . PHP_EOL;
+}
+if(1 == true)
+{
+    echo '1 == true' . PHP_EOL;
+}
+if(1 == false)
+{
+    echo '1 == false' . PHP_EOL;
+}
+
 echo PHP_EOL;
+echo ' --- PLIKI .csv --- ' . PHP_EOL;
+
+$myfile = fopen("test.txt", "a+") or die("Nie mozna otworzyc pliku!");
+$txt = "Joanna Jelito" . PHP_EOL;
+echo $txt;
+fwrite($myfile, $txt);
+fclose($myfile);
+
+echo PHP_EOL;
+echo ' --- WYPISYWANIE DANYCH Z PLIKU .csv --- ' . PHP_EOL;
+
+$row = 1;
+if (($handle = fopen("test.csv", "r")) !== FALSE) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $num = count($data);
+        echo $row . ' ';
+        $row++;
+        for ($c = 0; $c < $num; $c++) {
+            echo $data[$c] . ' ';
+            if(($c + 1) % 3 === 0)
+            {
+                echo PHP_EOL;
+            }
+        }
+    }
+    fclose($handle);
+}
