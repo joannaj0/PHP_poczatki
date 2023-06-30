@@ -69,9 +69,8 @@ echo PHP_EOL;
 echo ' --- SPRAWDZENIE --- ' . PHP_EOL;
 
 $zmienna = '1';
-if ($zmienna === 1)
-{
-   echo $zmienna . ' To jest jedynka, ktora nie jest parzysta' . PHP_EOL;
+if ($zmienna === 1) {
+    echo $zmienna . ' To jest jedynka, ktora nie jest parzysta' . PHP_EOL;
 }
 
 echo PHP_EOL;
@@ -177,20 +176,16 @@ if (2 === '2') {
     echo '2 === string 2';
 }
 
-if(0 == true)
-{
+if (0 == true) {
     echo '0 == true' . PHP_EOL;
 }
-if(0 == false)
-{
+if (0 == false) {
     echo '0 == false' . PHP_EOL;
 }
-if(1 == true)
-{
+if (1 == true) {
     echo '1 == true' . PHP_EOL;
 }
-if(1 == false)
-{
+if (1 == false) {
     echo '1 == false' . PHP_EOL;
 }
 
@@ -214,12 +209,10 @@ if (($handle = fopen("test.csv", "r")) !== FALSE) {
         $row++;
         for ($c = 0; $c < $num; $c++) {
             echo $data[$c] . ' ';
-            if(($c + 1) % 3 === 0)
-            {
+            if (($c + 1) % 3 === 0) {
                 echo PHP_EOL;
             }
         }
     }
     fclose($handle);
 }
-
