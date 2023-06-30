@@ -28,8 +28,8 @@ if (false === ($handle = fopen($plik_z_danymi, 'r'))) {
 $employees = array();
 
 while (false !== ($employee_details = fgetcsv($handle, 1000, $separator))) {
-    $employees[] = array(
-        'id' => $employee_details[0],
+    $employees[$employee_details[0]] = array(
+        //'id' => $employee_details[0],
         'name' => $employee_details[1],
         'last_name' => $employee_details[2],
         'phone_number' => $employee_details[3],
