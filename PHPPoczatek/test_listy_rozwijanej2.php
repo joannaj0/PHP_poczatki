@@ -1,10 +1,9 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display.errors','On');
+ini_set('display.errors', 'On');
 header('Content-Type: text/html; charset=utf-8');
 
 require 'przygotuj_dane.php';
-
 
 $tablica_czcionek = array(
     1 => 'Arial',
@@ -46,6 +45,11 @@ $defaultfontsize = 20;
 
 <!Doctype Html>
 <html>
+<style>
+    .stopka {
+        background-color: #C87A6A;
+    }
+</style>
 
 <head>
     <met charset="utf-8" />
@@ -59,6 +63,7 @@ $defaultfontsize = 20;
     <form action="test_listy_rozwijanej2.php" method="GET">
         <select name="czcionka_id" onchange="this.form.submit()">
             <option value="">-- Wybierz czcionkę--</option>
+
             <?php
             foreach ($tablica_czcionek as $key => $czcionka) {
                 $selected = '';
@@ -68,10 +73,12 @@ $defaultfontsize = 20;
                 echo "<option{$selected} value=$key>" . str_replace("'", '', $czcionka) . "</option>" . PHP_EOL;
             }
             ?>
+
         </select>
         <br></br>
         <select name="rozmiar_id" onchange="this.form.submit()">
             <option value="">-- Wybierz rozmiar czcionki--</option>
+
             <?php
             foreach ($tablica_romiarow as $key => $rozmiar) {
                 $selected = '';
@@ -81,10 +88,12 @@ $defaultfontsize = 20;
                 echo "<option{$selected} value=$key>" . $rozmiar . "</option>" . PHP_EOL;
             }
             ?>
+
         </select>
         <br></br>
         <select name="osoba_id" onchange="this.form.submit()">
             <option value="">-- Wybierz osobę --</option>
+
             <?php
             foreach ($employees as $id => $employee) {
                 $selected = '';
@@ -94,34 +103,62 @@ $defaultfontsize = 20;
                 echo "<option{$selected} value={$id}>" . $employee['name'] . ' ' . $employee['last_name'] . "</option>" . PHP_EOL;
             }
             ?>
+
         </select>
         <br></br>
         <b>STOPKA</b>
-        <?php
+        <div id="stopka" style="background-color: #C87A6A;">
+            <?php
+            //if ('test_listy_rozwijanej2.php' !== substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']))) {
+            if ($_GET['id'] !== '') {
+                if (array_key_exists(intval($_GET['czcionka_id']), $tablica_czcionek)) {
+                    $fontfamily = '"font-family: ' . $tablica_czcionek[intval($_GET['czcionka_id'])];
+                } else {
+                    $fontfamily = '"font-family: ' . $defaultfontfamily;
+                }
 
-        //if ('test_listy_rozwijanej2.php' !== substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']))) {
-        if($_GET['id'] !== ''){
-            if (array_key_exists(intval($_GET['czcionka_id']), $tablica_czcionek)) {
-                $fontfamily = '"font-family: ' . $tablica_czcionek[intval($_GET['czcionka_id'])];
-            } else {
-                $fontfamily = '"font-family: ' . $defaultfontfamily;
+                if (array_key_exists($_GET['rozmiar_id'], $tablica_romiarow)) {
+                    $fontsize = 'font-size: ' . $tablica_romiarow[intval($_GET['rozmiar_id'])] . 'px';
+                } else {
+                    $fontsize = 'font-size: ' . $defaultfontsize;
+                }
+
+                echo '<p style=' . $fontfamily . ';' . $fontsize . ';">';
+
+                if (array_key_exists($_GET['osoba_id'], $employees)) {
+                    echo '<br/> Z poważaniem <br/>' . $employees[$_GET['osoba_id']]['position'] . '<br/>' . $employees[$_GET['osoba_id']]['name'] . ' ' . $employees[$_GET['osoba_id']]['last_name'] . '<br/>' . $employees[$_GET['osoba_id']]['email'] . '<br/>' . $employees[$_GET['osoba_id']]['phone_number'] . '<br/> <br/>';
+                } else {
+                    echo '';
+                }
             }
+            ?>
+        </div>
 
-            if (array_key_exists($_GET['rozmiar_id'], $tablica_romiarow)) {
-                $fontsize = 'font-size: ' . $tablica_romiarow[intval($_GET['rozmiar_id'])] . 'px';
-            } else {
-                $fontsize = 'font-size: ' . $defaultfontsize;
-            }
-
-            echo '<p style=' . $fontfamily . ';' . $fontsize . ';">';
-
-            if (array_key_exists($_GET['osoba_id'], $employees)) {
-                echo '<br/> Z poważaniem <br/>' . $employees[$_GET['osoba_id']]['position'] . '<br/>' . $employees[$_GET['osoba_id']]['name'] . ' ' . $employees[$_GET['osoba_id']]['last_name'] . '<br/>' . $employees[$_GET['osoba_id']]['email'] . '<br/>' . $employees[$_GET['osoba_id']]['phone_number'] . '<br/> <br/>';
-            } else {
-                echo '';
-            }
+        <?php 
+        if (($_GET['osoba_id'] === '') || (!array_key_exists($_GET['osoba_id'], $employees))){
+            $disabled = ' disabled';
+        } else {
+            $disabled = '';
         }
         ?>
+
+        <button id="buttonSkopiuj" onclick="Skopiuj()" <?php echo $disabled; ?>>Skopiuj</button>
+
+        <?php //if (!empty ($_GET['osoba_id'])):?>
+        <!--<button id="buttonSkopiuj" onclick="Skopiuj()" >Skopiuj</button>-->
+        <?php //endif;?>
+
+        <script>
+            function Skopiuj() {
+                var r = document.createRange();
+                r.selectNode(document.getElementById("stopka"));
+                document.dele
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(r);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+            }
+        </script>
     </form>
     </p>
 </body>
