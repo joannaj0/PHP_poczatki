@@ -60,7 +60,7 @@ $defaultfontsize = 20;
     <h1>TWORZENIE STOPKI </h1>
     <b>WYBÓR OSOBY I CZCIONKI</b>
     <p>
-    <form action="test_listy_rozwijanej2.php" method="GET">
+    <form action="test_listy_rozwijanej3.php" method="GET">
         <select name="czcionka_id" onchange="this.form.submit()">
             <option value="">-- Wybierz czcionkę--</option>
 
@@ -123,15 +123,20 @@ $defaultfontsize = 20;
                     $fontsize = 'font-size: ' . $defaultfontsize;
                 }
 
-                echo '<p style=' . $fontfamily . ';' . $fontsize . ';">';
-
-                if (array_key_exists($_GET['osoba_id'], $employees)) {
-                    echo '<br/> Z poważaniem <br/>' . $employees[$_GET['osoba_id']]['position'] . '<br/>' . $employees[$_GET['osoba_id']]['name'] . ' ' . $employees[$_GET['osoba_id']]['last_name'] . '<br/>' . $employees[$_GET['osoba_id']]['email'] . '<br/>' . $employees[$_GET['osoba_id']]['phone_number'] . '<br/> <br/>';
-                } else {
-                    echo '';
-                }
             }
             ?>
+        </div>
+<?php
+$employee = $employees[$_GET['osoba_id']];
+$imie = $employee['name'];
+$nazwisko = $employee['last_name'];
+$numer = $employee['phone_number'];
+$mail = $employee['email'];
+$stanowisko = $employee['position'];
+
+?>
+        <div id="footer">
+            <?php require 'stopka2.php'; ?>
         </div>
 
         <?php 
@@ -151,8 +156,9 @@ $defaultfontsize = 20;
         <script>
             function Skopiuj() {
                 var r = document.createRange();
-                r.selectNode(document.getElementById("stopka"));
-                document.dele
+                r.selectNode(document.getElementById("footer"));
+                stopka = document.getElementById("footer");
+                                alert(stopka.innerHTML)
                 window.getSelection().removeAllRanges();
                 window.getSelection().addRange(r);
                 document.execCommand('copy');
