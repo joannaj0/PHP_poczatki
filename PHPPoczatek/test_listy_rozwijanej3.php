@@ -5,51 +5,14 @@ header('Content-Type: text/html; charset=utf-8');
 
 require 'przygotuj_dane.php';
 
-$tablica_czcionek = array(
-    1 => 'Arial',
-    2 => 'Georgia',
-    3 => 'Verdana',
-    4 => "'Times New Roman'"
+$tablica_stylow = array(
+    1 => 'Styl 1',
+    2 => 'Styl 2'
 );
-
-$tablica_romiarow = array(
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30
-);
-
-$defaultfontfamily = 'Arial';
-$defaultfontsize = 20;
-
 ?>
 
 <!Doctype Html>
 <html>
-<style>
-    .stopka {
-        background-color: #C87A6A;
-    }
-</style>
 
 <head>
     <met charset="utf-8" />
@@ -58,38 +21,26 @@ $defaultfontsize = 20;
 
 <body>
     <h1>TWORZENIE STOPKI </h1>
-    <b>WYBÓR OSOBY I CZCIONKI</b>
+    <b>WYBÓR STYLU </b>
     <p>
     <form action="test_listy_rozwijanej3.php" method="GET">
-        <select name="czcionka_id" onchange="this.form.submit()">
-            <option value="">-- Wybierz czcionkę--</option>
+
+        <select name="styl_id" onchange="this.form.submit()">
+            <option value="">-- Wybierz styl --</option>
 
             <?php
-            foreach ($tablica_czcionek as $key => $czcionka) {
+            foreach ($tablica_stylow as $key => $styl) {
                 $selected = '';
-                if ($_GET['czcionka_id'] === strval($key)) {
+                if ($_GET['styl_id'] === strval($key)) {
                     $selected = ' selected';
                 }
-                echo "<option{$selected} value=$key>" . str_replace("'", '', $czcionka) . "</option>" . PHP_EOL;
+                echo "<option{$selected} value=$key>" . $styl . "</option>" . PHP_EOL;
             }
             ?>
 
         </select>
         <br></br>
-        <select name="rozmiar_id" onchange="this.form.submit()">
-            <option value="">-- Wybierz rozmiar czcionki--</option>
-
-            <?php
-            foreach ($tablica_romiarow as $key => $rozmiar) {
-                $selected = '';
-                if ($_GET['rozmiar_id'] === strval($key)) {
-                    $selected = ' selected';
-                }
-                echo "<option{$selected} value=$key>" . $rozmiar . "</option>" . PHP_EOL;
-            }
-            ?>
-
-        </select>
+        <b>WYBÓR OSOBY </b>
         <br></br>
         <select name="osoba_id" onchange="this.form.submit()">
             <option value="">-- Wybierz osobę --</option>
@@ -107,58 +58,42 @@ $defaultfontsize = 20;
         </select>
         <br></br>
         <b>STOPKA</b>
-        <div id="stopka" style="background-color: #C87A6A;">
-            <?php
-            //if ('test_listy_rozwijanej2.php' !== substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']))) {
-            if ($_GET['id'] !== '') {
-                if (array_key_exists(intval($_GET['czcionka_id']), $tablica_czcionek)) {
-                    $fontfamily = '"font-family: ' . $tablica_czcionek[intval($_GET['czcionka_id'])];
-                } else {
-                    $fontfamily = '"font-family: ' . $defaultfontfamily;
-                }
 
-                if (array_key_exists($_GET['rozmiar_id'], $tablica_romiarow)) {
-                    $fontsize = 'font-size: ' . $tablica_romiarow[intval($_GET['rozmiar_id'])] . 'px';
-                } else {
-                    $fontsize = 'font-size: ' . $defaultfontsize;
-                }
+        <?php
+        $employee = $employees[$_GET['osoba_id']];
+        $imie = $employee['name'];
+        $nazwisko = $employee['last_name'];
+        $numer = $employee['phone_number'];
+        $mail = $employee['email'];
+        $stanowisko = $employee['position'];
+        ?>
 
-            }
-            ?>
-        </div>
-<?php
-$employee = $employees[$_GET['osoba_id']];
-$imie = $employee['name'];
-$nazwisko = $employee['last_name'];
-$numer = $employee['phone_number'];
-$mail = $employee['email'];
-$stanowisko = $employee['position'];
-
-?>
-        <div id="footer">
-            <?php require 'stopka2.php'; ?>
-        </div>
-
-        <?php 
-        if (($_GET['osoba_id'] === '') || (!isset($_GET['osoba_id']))){
+        <?php
+        if (($_GET['osoba_id'] === '') || (!isset($_GET['osoba_id']))) {
             $disabled = ' disabled';
+            echo '<br></br>';
         } else {
             $disabled = '';
+            echo '<div id="footer">';
+            if(($_GET['styl_id'] === '1') || ($_GET['styl_id'] === '') || (!isset($_GET['styl_id'])))
+            {
+                require 'stopka2.php';
+            }
+            else
+            {
+                require 'stopka3.php';
+            }
+            echo '</div>';
         }
         ?>
 
         <button id="buttonSkopiuj" onclick="Skopiuj()" <?php echo $disabled; ?>>Skopiuj</button>
-
-        <?php //if (!empty ($_GET['osoba_id'])):?>
-        <!--<button id="buttonSkopiuj" onclick="Skopiuj()" >Skopiuj</button>-->
-        <?php //endif;?>
-
         <script>
             function Skopiuj() {
                 var r = document.createRange();
                 r.selectNode(document.getElementById("footer"));
                 stopka = document.getElementById("footer");
-                                alert(stopka.innerHTML)
+                //alert(stopka.innerHTML)
                 window.getSelection().removeAllRanges();
                 window.getSelection().addRange(r);
                 document.execCommand('copy');

@@ -110,7 +110,7 @@ $defaultfontsize = 20;
         <div id="stopka" style="background-color: #C87A6A;">
             <?php
             //if ('test_listy_rozwijanej2.php' !== substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']))) {
-            if ($_GET['id'] !== '') {
+            if ($_GET['osoba_id'] !== '') {
                 if (array_key_exists(intval($_GET['czcionka_id']), $tablica_czcionek)) {
                     $fontfamily = '"font-family: ' . $tablica_czcionek[intval($_GET['czcionka_id'])];
                 } else {
