@@ -33,8 +33,10 @@ $tablica_stylow = array(
                 $selected = '';
                 if ($_GET['styl_id'] === strval($key)) {
                     $selected = ' selected';
+
                 }
-                echo "<option{$selected} value=$key>" . $styl . "</option>" . PHP_EOL;
+
+                echo "<option{$selected} value=$key>" . $styl . $domyslny . "</option>" . PHP_EOL;
             }
             ?>
 
@@ -75,12 +77,9 @@ $tablica_stylow = array(
         } else {
             $disabled = '';
             echo '<div id="footer">';
-            if(($_GET['styl_id'] === '1') || ($_GET['styl_id'] === '') || (!isset($_GET['styl_id'])))
-            {
+            if (($_GET['styl_id'] === '1') || ($_GET['styl_id'] === '') || (!isset($_GET['styl_id']))) {
                 require 'stopka2.php';
-            }
-            else
-            {
+            } else {
                 require 'stopka3.php';
             }
             echo '</div>';
