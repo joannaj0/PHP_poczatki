@@ -1,10 +1,8 @@
-<style>
-    .style {
-        background-color: #E9B8EB;
-    }
-</style>
+<?php
+require 'mime_content_type.php';
+?>
 
-<div id="stopka" style="background-color: #E9B8EB;">
+<div id="stopka" style="background-color: white;">
     <p style="font-family: Arial; font-size: 20px;">
         Z wyrazami szacunku
         <em><br>
@@ -16,8 +14,15 @@
         <?= $mail ?> </br>
         <?= $numer ?>
         <br></br>
-        <img src="logo3.png" border="0" width="50" height="20" style="float: left">
-        <br>A&D</br>
-        ul.Opolska 1, 45-300 Opole
+
+        <?php
+        $img = 'logo4.png';
+        $src = 'data:' . mime_content_type($img) . ';base64,' . base64_encode(file_get_contents($img));
+        echo '<img src="' . $src . '" border="0" width="50" height="50" style="float: left">';
+        ?>
+
+        <br></br>
+        <br>ul.Opolska 1, 45-300 Opole</br>
+        <br><a href="https://www.facebook.com/">Facebook</a>
     </p>
 </div>

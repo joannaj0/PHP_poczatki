@@ -15,92 +15,145 @@ $tablica_stylow = array(
 <html>
 
 <head>
-    <met charset="utf-8" />
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>WYBÓR OSOBY</title>
+
+    <style>
+        li.menu {
+            display: inline;
+        }
+
+        li.menu a {
+            background-image: url(tab.gif);
+            width: 138px;
+            text-align: center;
+            color: #2c2c2c;
+            text-decoration: none;
+            border-bottom: 1px black solid;
+            float: left;
+        }
+
+        li.menu a:hover {
+            background-image: url(tabhover.gif);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>TWORZENIE STOPKI </h1>
-    <b>WYBÓR STYLU </b>
-    <p>
-    <form action="test_listy_rozwijanej3.php" method="GET">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 
-        <select name="styl_id" onchange="this.form.submit()">
-            <option value="">-- Wybierz styl --</option>
+    <div class="container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                </a>
+            </div>
 
-            <?php
-            foreach ($tablica_stylow as $key => $styl) {
-                $selected = '';
-                if ($_GET['styl_id'] === strval($key)) {
-                    $selected = ' selected';
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/test_listy_rozwijanej3.php" class="nav-link px-2">Tworzenie
+                        stopki</a></li>
+                <li><a href="/formularz.php" class="nav-link px-2 link-secondary">Wysyłanie
+                        formularza</a></li>
+            </ul>
 
-                }
+        </header>
+        <br><br>
 
-                echo "<option{$selected} value=$key>" . $styl . $domyslny . "</option>" . PHP_EOL;
-            }
-            ?>
+        <div class="col-md-5 col-lg-10">
+            <h4 class="mb-3">TWORZENIE STOPKI</h4>
+            <form action="test_listy_rozwijanej3.php" method="GET">
+                <div class="col-md-4">
+                    <label for="styl_id" class="form-label">WYBÓR STYLU</label>
+                    <select class="form-select" id="styl_id" name="styl_id" onchange="this.form.submit()">
+                        <option value="">-- Wybierz styl --</option>
 
-        </select>
-        <br></br>
-        <b>WYBÓR OSOBY </b>
-        <br></br>
-        <select name="osoba_id" onchange="this.form.submit()">
-            <option value="">-- Wybierz osobę --</option>
+                        <?php
+                        foreach ($tablica_stylow as $key => $styl) {
+                            $selected = '';
+                            if ($_GET['styl_id'] === strval($key)) {
+                                $selected = ' selected';
 
-            <?php
-            foreach ($employees as $id => $employee) {
-                $selected = '';
-                if ($_GET['osoba_id'] === strval($id)) {
-                    $selected = ' selected';
-                }
-                echo "<option{$selected} value={$id}>" . $employee['name'] . ' ' . $employee['last_name'] . "</option>" . PHP_EOL;
-            }
-            ?>
+                            }
 
-        </select>
-        <br></br>
-        <b>STOPKA</b>
+                            echo "<option{$selected} value=$key>" . $styl . $domyslny . "</option>" . PHP_EOL;
+                        }
+                        ?>
 
-        <?php
-        $employee = $employees[$_GET['osoba_id']];
-        $imie = $employee['name'];
-        $nazwisko = $employee['last_name'];
-        $numer = $employee['phone_number'];
-        $mail = $employee['email'];
-        $stanowisko = $employee['position'];
-        ?>
+                    </select>
+                </div>
+                <br></br>
+                <div class="col-md-4">
+                    <label for="osoba_id" class="form-label">WYBÓR OSOBY</label>
+                    <select class="form-select" id="osoba_id" name="osoba_id" onchange="this.form.submit()">
+                        <option value="">-- Wybierz osobę --</option>
 
-        <?php
-        if (($_GET['osoba_id'] === '') || (!isset($_GET['osoba_id']))) {
-            $disabled = ' disabled';
-            echo '<br></br>';
-        } else {
-            $disabled = '';
-            echo '<div id="footer">';
-            if (($_GET['styl_id'] === '1') || ($_GET['styl_id'] === '') || (!isset($_GET['styl_id']))) {
-                require 'stopka2.php';
-            } else {
-                require 'stopka3.php';
-            }
-            echo '</div>';
-        }
-        ?>
+                        <?php
+                        foreach ($employees as $id => $employee) {
+                            $selected = '';
+                            if ($_GET['osoba_id'] === strval($id)) {
+                                $selected = ' selected';
+                            }
+                            echo "<option{$selected} value={$id}>" . $employee['name'] . ' ' . $employee['last_name'] . "</option>" . PHP_EOL;
+                        }
+                        ?>
 
-        <button id="buttonSkopiuj" onclick="Skopiuj()" <?php echo $disabled; ?>>Skopiuj</button>
-        <script>
-            function Skopiuj() {
-                var r = document.createRange();
-                r.selectNode(document.getElementById("footer"));
-                stopka = document.getElementById("footer");
-                //alert(stopka.innerHTML)
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(r);
-                document.execCommand('copy');
-                window.getSelection().removeAllRanges();
-            }
-        </script>
-    </form>
-    </p>
+                    </select>
+                    <br></br>
+
+                    <?php
+                    $employee = $employees[$_GET['osoba_id']];
+                    $imie = $employee['name'];
+                    $nazwisko = $employee['last_name'];
+                    $numer = $employee['phone_number'];
+                    $mail = $employee['email'];
+                    $stanowisko = $employee['position'];
+                    ?>
+
+                    <h4 class="h3 mb-3 fw-normal fs-6">STOPKA</h4>
+                    <div class="card-body">
+
+                        <?php
+                        if (($_GET['osoba_id'] === '') || (!isset($_GET['osoba_id']))) {
+                            $disabled = ' disabled';
+                            echo '<br></br>';
+                        } else {
+                            $disabled = '';
+                            echo '<div id="footer">';
+                            if (($_GET['styl_id'] === '1') || ($_GET['styl_id'] === '') || (!isset($_GET['styl_id']))) {
+                                require 'stopka2.php';
+                            } else {
+                                require 'stopka3.php';
+                            }
+                            echo '</div>';
+                        }
+                        ?>
+
+                        <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="Skopiuj()" <?php echo $disabled; ?>>Skopiuj</button>
+                        <script>
+                            function Skopiuj() {
+                                var r = document.createRange();
+                                r.selectNode(document.getElementById("footer"));
+                                stopka = document.getElementById("footer");
+                                //alert(stopka.innerHTML)
+                                window.getSelection().removeAllRanges();
+                                window.getSelection().addRange(r);
+                                document.execCommand('copy');
+                                window.getSelection().removeAllRanges();
+                            }
+                        </script>
+                    </div>
+            </form>
+        </div>
 </body>
 
 </html>
