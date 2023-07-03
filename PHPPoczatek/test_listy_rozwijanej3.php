@@ -144,16 +144,20 @@ $tablica_stylow = array(
                                 var r = document.createRange();
                                 r.selectNode(document.getElementById("footer"));
                                 stopka = document.getElementById("footer");
-                                //alert(stopka.innerHTML)
+                                document.getElementById('txtArea').style.visibility = 'visible';
+                                var text = document.getElementById("txtArea").value = stopka.innerHTML;
                                 window.getSelection().removeAllRanges();
                                 window.getSelection().addRange(r);
                                 document.execCommand('copy');
                                 window.getSelection().removeAllRanges();
                             }
+
                         </script>
                     </div>
+                    <br></br>
             </form>
         </div>
+        <textarea id="txtArea" name="txtArea" rows="170" cols="170" style="visibility: hidden"></textarea><br><br>
 </body>
 
 </html>
